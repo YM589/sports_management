@@ -1,0 +1,18 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<div class="module">
+    <h2>导入用户</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-row">
+            <label>选择CSV文件：</label>
+            <input type="file" name="csv_file" accept=".csv" required>
+        </div>
+        <div class="submit-row">
+            <input type="submit" value="导入" class="default">
+        </div>
+    </form>
+    <p>CSV文件格式要求：username,password,role,email,phone</p>
+</div>
+{% endblock %} 

@@ -1,0 +1,68 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls %}
+
+{% block content %}
+<div id="content-main">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <fieldset class="module aligned">
+                <div class="form-row">
+                    <div>
+                        <label for="excel_file">选择Excel文件：</label>
+                        <input type="file" name="excel_file" accept=".xlsx" required>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="submit-row">
+                <input type="submit" value="导入" class="default">
+            </div>
+        </div>
+    </form>
+    
+    <div class="help">
+        <h3>Excel文件格式说明：</h3>
+        <pre>{{ sample_format }}</pre>
+        
+        <h3>示例：</h3>
+        <table class="help-table">
+            <tr>
+                <th>username</th>
+                <th>password</th>
+                <th>email</th>
+                <th>title</th>
+                <th>specialty</th>
+                <th>phone</th>
+            </tr>
+            <tr>
+                <td>judge1</td>
+                <td>password123</td>
+                <td>judge1@example.com</td>
+                <td>高级裁判</td>
+                <td>跳高</td>
+                <td>13800138000</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<style>
+.help-table {
+    border-collapse: collapse;
+    margin: 10px 0;
+}
+.help-table th, .help-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+.help-table th {
+    background-color: #f5f5f5;
+}
+pre {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 4px;
+}
+</style>
+{% endblock %} 
