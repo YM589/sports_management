@@ -1,0 +1,50 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_urls %}
+
+{% block submit_buttons_bottom %}
+    {{ block.super }}
+    {% if show_quit_button %}
+        <div class="submit-row">
+            <input type="submit" value="管理弃权信息" name="_manage-quits" />
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block after_field_sets %}
+    {{ block.super }}
+    {% if original %}
+        <fieldset class="module aligned">
+            <h2>比赛日程信息</h2>
+            <div class="form-row">
+                <div>
+                    <label>距离比赛开始:</label>
+                    <p>{{ original.date|timeuntil }}</p>
+                </div>
+            </div>
+            {% if original.registration_deadline %}
+            <div class="form-row">
+                <div>
+                    <label>距离报名截止:</label>
+                    <p>{{ original.registration_deadline|timeuntil }}</p>
+                </div>
+            </div>
+            {% endif %}
+        </fieldset>
+        
+        <fieldset class="module aligned">
+            <h2>参赛情况</h2>
+            <div class="form-row">
+                <div>
+                    <label>已报名人数/最大人数:</label>
+                    <p>{{ original.get_participant_count }}/{{ original.max_participants }}</p>
+                </div>
+            </div>
+            <div class="form-row">
+                <div>
+                    <label>弃权人数:</label>
+                    <p>{{ original.get_quit_count }}</p>
+                </div>
+            </div>
+        </fieldset>
+    {% endif %}
+{% endblock %} 
